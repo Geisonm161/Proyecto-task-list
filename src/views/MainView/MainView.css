@@ -96,9 +96,3 @@
     color: rgba(0, 0, 0, 0.626);
 }
 
-.container-loader-view-main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-}

@@ -3,8 +3,6 @@ import {getItem} from './localStorage';
 
 const API_URL = "https://serverless-gamma-topaz.vercel.app/api";
 
-const { token } = getItem(process.env.REACT_APP_USER_TOKEN);
-
 async function register(email, password) {
 
     const resgisterURL = `${API_URL}/auth/register`;
@@ -56,6 +54,8 @@ async function login(email, password) {
 
 async function update(id, title, desc) {
 
+    const { token } = getItem(process.env.REACT_APP_USER_TOKEN);
+
     const response = await fetch(`https://serverless-gamma-topaz.vercel.app/api/todos/${id}`, {
         method: 'PUT',
         body: JSON.stringify({
@@ -77,6 +77,8 @@ async function update(id, title, desc) {
 
 async function task(title, desc) {
 
+    const { token } = getItem(process.env.REACT_APP_USER_TOKEN);
+
     const response = await fetch('https://serverless-gamma-topaz.vercel.app/api/todos/', {
         method: 'POST',
         headers: {
@@ -94,6 +96,8 @@ async function task(title, desc) {
 }
 
 async function getList() {
+
+    const { token } = getItem(process.env.REACT_APP_USER_TOKEN);
 
     const response = await fetch('https://serverless-gamma-topaz.vercel.app/api/todos/', {
         method: 'GET',
@@ -126,6 +130,8 @@ async function InformationTask(resulId) {
 }
 
 async function removeTaskList(resulId) {
+
+    const { token } = getItem(process.env.REACT_APP_USER_TOKEN);
 
     const URLId = `https://serverless-gamma-topaz.vercel.app/api/todos/${resulId}`
 

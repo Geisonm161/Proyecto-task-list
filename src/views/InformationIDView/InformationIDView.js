@@ -6,6 +6,8 @@ import ButtonIcons from '../../Componentes/IconsButton/ButtonIcons';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { InformationTask, removeTaskList } from '../../services';
+import AlertsAndLogin from '../../Componentes/AlertsAndLogin/AlertsAndLogin';
+import { setItem } from '../../services/localStorage';
 
 function InformationID({ handleTaskViewAction, handleUserSession }) {
 
@@ -24,6 +26,8 @@ function InformationID({ handleTaskViewAction, handleUserSession }) {
     setHandleLoadView(false);
 
     setResults([data]);
+
+    setItem(process.env.REACT_APP_TASK_YEY, [data]);
 
   }
 
@@ -98,9 +102,11 @@ function InformationID({ handleTaskViewAction, handleUserSession }) {
               rewriteHomework={rewriteHomework}
             />
         </div>
-        <div className='container-loader-id-view'>
-          {handleLoadView && <p className='loader'></p>}
-        </div>
+
+        <AlertsAndLogin 
+        handleAccessLoader={handleLoadView}
+        />
+  
       </div>
     </div>
   )

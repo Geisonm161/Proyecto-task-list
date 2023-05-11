@@ -6,7 +6,8 @@ import Button from '../../Componentes/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useCallback } from 'react';
 import { getList } from '../../services';
-import { setItem } from "../../services/localStorage";
+import { setItem, getItem } from "../../services/localStorage";
+import AlertsAndLogin from '../../Componentes/AlertsAndLogin/AlertsAndLogin';
 
 function MainView({ handleUserSession }) {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ function MainView({ handleUserSession }) {
   const [results, setResults] = useState([]);
   const [group, setGroup] = useState([]);
   const [values, setValues] = useState('');
-  const [loader, setLoader] = useState(false);
+  const [handleLoader, setHandleLoader] = useState(false);
   const [alertGuide, setAlertGuide] = useState(false);
 
   const handleChange = async (e) => {
@@ -29,16 +30,21 @@ function MainView({ handleUserSession }) {
     setValues(value);
   }
 
-  const handleSendFormulary = useCallback(async () => {
-    setLoader(true);
+  const ere = useCallback(console.log('nada'), []) ;
 
+  const datos = getItem(process.env.REACT_APP_TASK_YEY);
+
+  const handleSendFormulary = useCallback(async () => {
+    setHandleLoader(true);
+    
     const { data } = await getList();
 
     setGroup(data)
     setResults(data);
-    setLoader(false);
+    setHandleLoader(false);
 
     setItem(process.env.REACT_APP_TASK_YEY, data);
+
   }, [])
 
   const handleRemoveTask = (index) => (e) => {
@@ -114,21 +120,22 @@ function MainView({ handleUserSession }) {
 
         <div className='container-task-view-main'>
           {results.length !== 0 ? results.map((gro, index) =>
-              <Task
-                key={index}
-                title={<h3 style={{ fontWeight: 700 }}>{gro.title}</h3>}
-                desc={gro.desc}
-                onClick={() => navigate(`/list/${gro._id}`)}
-                removeTask={handleRemoveTask(index)}
-                accessClass={true}
-                handleColorTitle={true}
-              />
-            ):<p className='container-empty-task-list-view-main'>Empty task list</p>}
+            <Task
+              key={index}
+              title={<h3 style={{ fontWeight: 700 }}>{gro.title}</h3>}
+              desc={gro.desc}
+              onClick={() => navigate(`/list/${gro._id}`)}
+              removeTask={handleRemoveTask(index)}
+              accessClass={true}
+              handleColorTitle={true}
+            />
+          ) : <p className='container-empty-task-list-view-main'>Empty task list</p>}
         </div>
 
-        <div className='container-loader-view-main'>
-          {loader && <p className='loader'></p>}
-        </div>
+        <AlertsAndLogin
+          handleAccessLoader={handleLoader}
+        />
+
       </div>
     </div>
   )

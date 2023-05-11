@@ -2,8 +2,8 @@ import React from 'react'
 import './TextArea.css';
 
 function TextArea({ name,
-  requiredTextarea,
-  placeholderTextarea,
+  required,
+  placeholder,
   value,
   abovetext,
   onChange
@@ -16,8 +16,8 @@ function TextArea({ name,
 
       <textarea
         name={name}
-        required={requiredTextarea}
-        placeholder={placeholderTextarea}
+        required={required}
+        placeholder={placeholder}
         value={value}
         onChange={onChange}
         className='inside-input-textarea' /> </div>

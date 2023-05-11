@@ -1,4 +1,3 @@
-import React from 'react'
 import './RegisterView.css'
 import Input from '../../Componentes/Input/Input';
 import Imagen from '../../assets/image/Imagenes/Darlin-01.png';
@@ -6,49 +5,49 @@ import Button from '../../Componentes/Button/Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../../services';
+import AlertsAndLogin from '../../Componentes/AlertsAndLogin/AlertsAndLogin';
 
 function RegisterView() {
 
   const navigate = useNavigate();
 
-  const [users, setUsers] = useState({ userName: '', pasword: '' });
-  const [showError, setShowError] = useState(false);
-  const [handleAccessloader, setHandleAccessloader] = useState(false);
+  const [users, setUsers] = useState({ userName: '', password: '' });
+  const [handleAccessLoader, setHandleAccessLoader] = useState(false);
   const [userExist, setUserExist] = useState(null);
 
   const onChange = (e) => {
+
     const { value, name } = e.target;
-    const NewGroupObj = {
+
+    setUsers({
       ...users,
       [name]: value
-    }
-    setUsers(NewGroupObj)
+    })
+
   }
 
   const handleSendFormulary = async (e) => {
     e.preventDefault();
 
-    setHandleAccessloader(true);
-    const res = await register(users.userName, users.pasword);
+    setHandleAccessLoader(true);
 
-    if (users.userName !== '' && users.pasword !== '') {
+    const res = await register(users.userName, users.password);
 
-      if (res.message === 'User already exist') {
-        setUserExist(true);
-        setHandleAccessloader(false);
-        setTimeout(() => {
-          setUserExist(false);
-        }, 3000);
-      } else {
-        navigate('/login');
-      }
-    } else {
-      setHandleAccessloader(false);
-      setShowError(true);
+    if (res.message === 'User already exist') {
+
+      setUserExist(true);
+      setHandleAccessLoader(false);
+
       setTimeout(() => {
-        setShowError(false);
+        setUserExist(false);
       }, 3000);
+
+      return;
+
     }
+
+    handleAccessLogin();
+
   }
 
   const handleAccessLogin = () => {
@@ -73,6 +72,7 @@ function RegisterView() {
       </div>
 
       <div className='sub-container-register'>
+
         <div className='container-title-register'>
           <h1 className='title-register'>Register Screen</h1>
         </div>
@@ -82,39 +82,29 @@ function RegisterView() {
             <Input
               aboveInput='UserName'
               onChange={onChange}
-              className={true}
+              className
               name='userName'
               placeholder='UserName here'
               value={users.userName}
               type='email'
-              required={true}
+              required
             />
 
             <Input
               aboveInput='Pasword'
               onChange={onChange}
-              className={true}
-              name='pasword'
+              className
+              name='password'
               placeholder='Pasword here'
-              value={users.pasword}
+              value={users.password}
               type='password'
+              required
             />
 
-            {
-              showError
-              && <p className='error-register'>
-                all capos are required</p>
-            }
-
-            {
-              userExist
-              && <p className='error-user-register'>
-                This user already exists</p>
-            }
-
-            <div className='container-loader-register'>
-              {handleAccessloader && <p className='loader'></p>}
-            </div>
+            <AlertsAndLogin
+              userExist={userExist}
+              handleAccessLoader={handleAccessLoader}
+            />
 
             <div className='container-button-register'>
               <Button
@@ -122,6 +112,7 @@ function RegisterView() {
                 className={true}
                 Text='Register'
               />
+
             </div>
           </form>
         </div>

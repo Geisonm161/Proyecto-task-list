@@ -1,5 +1,4 @@
-import React from 'react'
-import './RewriteTaskView.css'
+import './RewriteTaskView.css';
 import Input from '../../Componentes/Input/Input';
 import Imagen from '../../assets/image/Imagenes/Darlin-01.png';
 import Button from '../../Componentes/Button/Button';
@@ -7,61 +6,47 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { update } from '../../services';
 import TextArea from '../../Componentes/TextArea/TextArea';
-import { setItem, getItem } from '../../services/localStorage';
+import { getItem } from '../../services/localStorage';
+import AlertsAndLogin from '../../Componentes/AlertsAndLogin/AlertsAndLogin';
 
 function RewriteTaskView({ handleTaskViewAction, handleUserSession }) {
 
   const navigate = useNavigate();
   const params = useParams();
   const userTokenKey = process.env.REACT_APP_TASK_YEY
+  const datosStorage = getItem(userTokenKey) ?? '[]';
+
 
   const [group, setGroup] = useState({ title: "", description: "" });
-  const [error, setError] = useState(false);
   const [handleAccessLoader, setHandleAccessLoader] = useState(false);
 
   const idInUse = () => {
 
-    let datosStorage = getItem(userTokenKey) ?? '[]';
+    const newGroup = datosStorage.filter(group => group._id && group._id === params.id);
 
-    const newGroup = datosStorage.filter(group => group._id === params.id);
+    const takeRope = newGroup[0];
 
-    const newGroup1 = newGroup[0];
-
-    setGroup({ title: newGroup1.title, description: newGroup1.desc });
+    setGroup({ title: takeRope.title, description: takeRope.desc });
 
   }
 
   const onChange = (e) => {
     const { value, name } = e.target;
-    const NewGroupObj = {
+    setGroup({
       ...group,
       [name]: value
-    }
-    setGroup(NewGroupObj)
+    })
   }
 
   const handleSendFormulary = async (e) => {
-
     e.preventDefault();
+
+    setHandleAccessLoader(true);
 
     const { data } = await update(params.id, group.title, group.description);
 
-    if (group.title !== '' || group.description !== '') {
+    Back();
 
-      setHandleAccessLoader(true);
-
-      setTimeout(() => {
-        let datosStorage = getItem(userTokenKey) ?? '[]';
-        setItem(userTokenKey, ...datosStorage, group);
-        handleTaskViewAction(false);
-      }, 3000);
-
-    } else {
-      setError(true);
-      setTimeout(() => {
-        setError(false);
-      }, 3000);
-    }
   }
 
   const Back = () => {
@@ -96,7 +81,7 @@ function RewriteTaskView({ handleTaskViewAction, handleUserSession }) {
 
       </div>
       <div className='sub-container-rewrite'>
-        
+
         <div className='container-button-back-rewrite'>
           <button
             onClick={Back}
@@ -108,6 +93,7 @@ function RewriteTaskView({ handleTaskViewAction, handleUserSession }) {
         <form onSubmit={handleSendFormulary}>
           <div className='container-input-rewrite'>
             <Input
+              required
               aboveInput='Title'
               onChange={onChange}
               className={true}
@@ -116,20 +102,19 @@ function RewriteTaskView({ handleTaskViewAction, handleUserSession }) {
               value={group.title} />
 
             <TextArea
+              required
               classNameTextarea={true}
               abovetext='Description'
               onChange={onChange}
               name='description'
-              placeholderTextarea='Description here'
+              placeholder='Description here'
               value={group.description}
             />
           </div>
 
-          {error && <p className='error'>Todos los campos son obligatorios</p>}
-
-          <div className='container-loader-rewrite'>
-            {handleAccessLoader && <p className='loader'></p>}
-          </div>
+          <AlertsAndLogin
+            handleAccessLoader={handleAccessLoader}
+          />
 
           <div className='container-button-rewrite'>
             <Button

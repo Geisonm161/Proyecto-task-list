@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { task } from '../../services';
 import { getItem, setItem } from '../../services/localStorage';
-
+import AlertAndLogin from '../../Componentes/AlertsAndLogin/AlertsAndLogin';
 
 function CreateTaskView({ handleUserSession }) {
 
@@ -14,45 +14,34 @@ function CreateTaskView({ handleUserSession }) {
   const navigate = useNavigate();
 
   const [group, setGroup] = useState({ title: "", description: "" });
-  const [error, setError] = useState(false);
   const [handleAccessloader, setHandleAccessLoader] = useState(false);
 
   const onChange = (e) => {
+
     const { value, name } = e.target;
-    const NewGroupObj = {
+    setGroup({
       ...group,
       [name]: value
-    }
-    setGroup(NewGroupObj)
+    })
   }
 
   const handleSendFormulary = async (e) => {
     e.preventDefault();
 
-    if (group.title !== '' && group.description !== '') {
-      
-      setHandleAccessLoader(true);
+    setHandleAccessLoader(true);
+
+    if (group.title && group.description) {
 
       const res = await task(group.title, group.description);
 
-      setTimeout(() => {
-
-        let DatosLocal = getItem(userTokenKey) ?? '[]';
+        const DatosLocal = getItem(userTokenKey) ?? '[]';
         setItem(userTokenKey, [...DatosLocal, group])
 
         navigate('/list');
 
-      }, 3000);
-    } else {
-
-      setError(true);
-
-      setTimeout(() => {
-        setError(false);
-      }, 3000);
-      
     }
   }
+
   const handleAccessToMainView = () => {
     navigate('/list');
   }
@@ -84,11 +73,8 @@ function CreateTaskView({ handleUserSession }) {
       </div>
 
       <div className='sub-container-view-task'>
-
         <div className='container-title-view-task'>
-
           <div className='container-button-view-task'>
-
             <h1 className='title-view-task'>Create New Task</h1>
 
             <button
@@ -99,43 +85,43 @@ function CreateTaskView({ handleUserSession }) {
           </div>
 
         </div>
+        
         <form onSubmit={handleSendFormulary}>
           <div className='container-input-view-task'>
             <Input
+              type='text'
               aboveInput='Title'
               onChange={onChange}
               className={true}
               name='title'
               placeholder='Title here'
               value={group.title}
+              required
             />
             <Input
+              type='text'
               aboveInput='Description'
               onChange={onChange}
               className={true}
               name='description'
               placeholder='Description here'
               value={group.description}
+              required
             />
           </div>
 
-          {
-            error
-            && <p className='error-view-task'>
-              All fields are required</p>
-          }
-
-          <div className='container-loader-view-task'>
-            {handleAccessloader && <p className='loader'></p>}
-          </div>
-
+          <AlertAndLogin
+            handleAccessLoader={handleAccessloader}
+          />
 
           <div className='container-button-create-view-task'>
             <Button
               type='submit'
               className={true}
               Text='Create Task'
-            /></div>
+            />
+          
+          </div>
         </form>
       </div>
     </div>

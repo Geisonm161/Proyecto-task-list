@@ -5,55 +5,49 @@ import Button from '../../Componentes/Button/Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../services';
+import AlertsAndLogin from '../../Componentes/AlertsAndLogin/AlertsAndLogin';
 
 function LoginView({ handleUserSession }) {
 
   const navigate = useNavigate();
 
-  const [users, setUsers] = useState({ userName: '', pasword: '' });
-  const [error, setError] = useState(false);
-  const [loader, setLoader] = useState(false);
-  const [userExist, setUserExist] = useState(null);
+  const [users, setUsers] = useState({ userName: '', password: '' });
+  const [HandleLoader, setHandleLoader] = useState(false);
+  const [userInvalid, setUserInvalid] = useState(null);
 
   const onChange = (e) => {
 
     const { value, name } = e.target;
-    const NewGroupObj = {
+    setUsers({
       ...users,
       [name]: value
-    }
-    setUsers(NewGroupObj)
+    })
+
   }
 
   const handleSendFormulary = async (e) => {
     e.preventDefault();
 
-    setLoader(true);
+    setHandleLoader(true);
 
-    const res = await login(users.userName, users.pasword);
+    const res = await login(users.userName, users.password);
 
-    setLoader(false);
+    setHandleLoader(false);
 
-    if (users.userName !== '' && users.pasword !== '') {
-      
-      if (res.message === 'User and/or Password Incorrect') {
-        setUserExist(true);
-        setLoader(false);
-        setTimeout(() => {
-          setUserExist(false);
-        }, 5000);
-      } else {
-        handleUserSession(res);
-        navigate('/list');
-      }
-
-    } else {
-      setLoader(false);
-      setError(true);
+    if (res.message === 'User and/or Password Incorrect') {
+      setUserInvalid(true);
+      setHandleLoader(false);
       setTimeout(() => {
-        setError(false);
-      }, 3000);
+        setUserInvalid(false);
+      }, 5000);
+
+      return;
+
     }
+
+    handleUserSession(res);
+
+    navigate('/list');
 
   }
 
@@ -82,7 +76,9 @@ function LoginView({ handleUserSession }) {
           <h1 className='title-login'>Login</h1>
 
         </div>
+
         <div className='container-input-login'>
+
           <form onSubmit={handleSendFormulary}>
 
             <Input
@@ -93,41 +89,33 @@ function LoginView({ handleUserSession }) {
               placeholder='UserName here'
               value={users.userName}
               type='text'
-              required={true}
+              required
             />
 
             <Input
               aboveInput='Pasword'
               onChange={onChange}
               className={true}
-              name='pasword'
+              name='password'
               placeholder='Pasword here'
-              value={users.pasword}
+              value={users.password}
               type='password'
+              required
             />
 
-            {
-            error 
-            && <p className='error-login'>
-              All capos are required</p>
-              }
-
-            {
-            userExist 
-            && <p className='error-user-login'>
-              User and/or Password Incorrect</p>
-              }
-
-            <div className='container-loader'>
-              {loader && <p className='loader'></p>}
-            </div>
+            <AlertsAndLogin
+              handleAccessLoader={HandleLoader}
+              userInvalid={userInvalid}
+            />
 
             <div className='container-button-login'>
               <Button
                 type='submit'
                 className={true}
                 Text='Login'
-              /></div>
+              />
+
+            </div>
           </form>
         </div>
 
