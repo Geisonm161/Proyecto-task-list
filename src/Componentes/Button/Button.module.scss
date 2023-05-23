@@ -1,18 +1,13 @@
+
+@import '../../SASS/Mixin.module.scss';
+
 .containerButton {
   margin: 10px;
 }
 
 .buttonGlobal {
-  font-size: 20px;
-  color: rgb(255, 255, 255);
-  width: 150px;
-  height: 55px;
-  font-weight: lighter;
-  font-family: sans-serif;
-  background-color: rgba(17, 0, 255, 0.741);
-  border: solid black 2px;
-  border-radius: 5px;
-  cursor: pointer;
+  @include globalButton();
+  @include globalButton( min-width, 0px, max-width, 550px, 10px, 75px, 27px);
 
   &.buttonGlobal:hover {
     background-color: rgb(11, 0, 167);

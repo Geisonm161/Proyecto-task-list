@@ -36,12 +36,11 @@
 }
 
 .buttonLogOutTopRight{
-    margin-right: 25px;
     pointer-events: auto;
     background: none;
     border: none;
     color: white;
-    padding: 10px;
+    padding-right: 15px;
     cursor: pointer;
     font-size: 20px;
 
@@ -63,7 +62,7 @@
 .subContainer{
     
     @include subContainer(min-width, 0px, max-width, 899px, 90vw );
-    @include subContainer(min-width, 900px, max-width, 15000px, 750px);
+    @include subContainer(min-width, 900px, max-width, 15000px, 550px);
   
     &.subContainer::-webkit-scrollbar{
         width: 0px;
@@ -86,7 +85,7 @@
 .title{
 
 @include title();
-@include title($minMedia : min-width, $minExtent : 900px, $maxMedia : max-width, $maxExtent : 15000px, $mediaText : 40px);
+@include title($minMedia : min-width, $minExtent : 900px, $maxMedia : max-width, $maxExtent : 15000px, );
 margin-left: 10px;
 
 
@@ -105,4 +104,8 @@ margin-left: 10px;
     align-items: center;
     margin-bottom: 20px;
 
+}
+
+.titleRegisterAndLogin{
+    font-size: 35px;
 }

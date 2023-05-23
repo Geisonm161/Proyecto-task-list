@@ -1,6 +1,6 @@
 // Mixin
 
-@mixin mv($media : max-width, $medida : 500px, $largo : 100%, $imageUrl: url(./assets/image/Imagenes/mv-01.jpg)) {
+@mixin mv($media : max-width, $medida : 500px, $largo : 100%, $imageUrl: url(../assets/image/Imagenes/original-01.jpg)) {
 
     @media screen and ($media : $medida) {
 
@@ -26,7 +26,7 @@
 }
 
 
-@mixin subContainer($minMedia, $minExtent, $maxMedia, $maxExtent, $width, $padding : 0 2%) {
+@mixin subContainer($minMedia, $minExtent, $maxMedia, $maxExtent, $width, $padding : 0 1%) {
 
     @media only screen and ($minMedia : $minExtent) and ($maxMedia : $maxExtent) {
         display: flex;
@@ -42,7 +42,7 @@
 }
 
 
-@mixin containerTitle($minMedia : min-width, $minExtent : 551px, $maxMedia : max-width, $maxExtent : 15000px, $margin : 0 0 0 35%, $width : 65% ) {
+@mixin containerTitle($minMedia : min-width, $minExtent : 551px, $maxMedia : max-width, $maxExtent : 15000px, $margin : 0, $width : 100%) {
     @media only screen and ($minMedia : $minExtent) and ($maxMedia : $maxExtent) {
         margin: $margin;
         width: $width;
@@ -55,16 +55,91 @@
 
 
 
-@mixin title($minMedia : min-width, $minExtent : 0px, $maxMedia : max-width, $maxExtent : 550px, $mediaText : 25px){
+@mixin title($minMedia : min-width, $minExtent : 0px, $maxMedia : max-width, $maxExtent : 550px) {
     @media only screen and ($minMedia : $minExtent) and ($maxMedia : $maxExtent) {
-        font-size: $mediaText;
         color: rgb(0, 0, 0);
     }
 
 }
 
-@mixin marginButtonCancel($minMedia : min-width, $minExtent : 0px, $maxMedia : max-width, $maxExtent : 550px, $marginLeft : 40%){
+@mixin marginButtonCancel($minMedia : min-width, $minExtent : 0px, $maxMedia : max-width, $maxExtent : 550px, $marginLeft : 40%) {
     @media only screen and ($minMedia : $minExtent) and ($maxMedia : $maxExtent) {
-margin-left: $marginLeft;
+        margin-left: $marginLeft;
     }
+}
+
+@mixin globalButton($minMedia : min-width, $minExtent : 551px, $maxMedia : max-width, $maxExtent : 15000px, $fontSize : 18px, $width : 135px, $height : 40px) {
+    @media only screen and ($minMedia : $minExtent) and ($maxMedia : $maxExtent) {
+        font-size: $fontSize;
+        color: rgb(255, 255, 255);
+        width: $width;
+        height: $height;
+        font-weight: lighter;
+        font-family: sans-serif;
+        background-color: rgba(17, 0, 255, 0.741);
+        border: solid black 2px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+}
+
+@mixin inputInside($minMedia : min-width, $minExtent : 551px, $maxMedia : max-width, $maxExtent : 15000px, $padding : 15px) {
+
+    @media only screen and ($minMedia : $minExtent) and ($maxMedia : $maxExtent) {
+
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: $padding;
+        margin-bottom: 5%;
+        border: 2px solid rgb(0, 0, 0);
+        border-radius: 10px;
+        overflow: auto;
+    }
+
+}
+
+@mixin inputMain($minMedia : min-width, $minExtent : 551px, $maxMedia : max-width, $maxExtent : 15000px, $padding : 15px) {
+
+    @media only screen and ($minMedia : $minExtent) and ($maxMedia : $maxExtent) {
+
+        border: 2px solid rgb(0, 0, 0);
+        border-radius: 10px;
+        width: 100%;
+        padding: $padding;
+        border: 2px solid rgb(0, 0, 0);
+        border-radius: 10px;
+        overflow: auto;
+
+    }
+
+}
+
+@mixin inputFoot($minMedia : min-width, $minExtent : 551px, $maxMedia : max-width, $maxExtent : 15000px, $fontSize : 20px) {
+
+    @media only screen and ($minMedia : $minExtent) and ($maxMedia : $maxExtent) {
+
+        margin: 0px 0px 2px 10px;
+        font-weight: 500;
+        color: rgb(0, 0, 0);
+        font-size: $fontSize;
+    }
+
+}
+
+@mixin backButton($minMedia : min-width, $minExtent : 551px, $maxMedia : max-width, $maxExtent : 15000px, $height : 35px, $width : 60px, $fontSize : 18px) {
+
+    @media only screen and ($minMedia : $minExtent) and ($maxMedia : $maxExtent) {
+
+        height: $height;
+        width: $width;
+        font-size: $fontSize;
+        background-color: rgb(0, 0, 0);
+        border: none;
+        color: rgb(255, 255, 255);
+        font-family: sans-serif;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
 }

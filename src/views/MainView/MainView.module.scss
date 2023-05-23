@@ -3,10 +3,9 @@
 
 .containerSub{
     @include subContainer(min-width, 200px, max-width, 899px, 90vw );
-    @include subContainer(min-width, 900px, max-width, 15000px, 750px, 2%);
+    @include subContainer(min-width, 900px, max-width, 15000px, 650px, 1%);
     min-height: 40vh;    
     max-height: 70vh;
-    padding: 2% 2%;
 
     &.containerSub::-webkit-scrollbar{
         width: 0px;
@@ -42,7 +41,7 @@
 }
 
 .titleContainer{
-    @include containerTitle( min-width, 551px, max-width, 15000px, 0 0 30px 35%, 65%);
+    @include containerTitle( min-width, 551px, max-width, 15000px, 0 0 5px 0, 100%);
     @include containerTitle($minMedia : min-width, $minExtent : 200px, $maxMedia : max-width, $maxExtent : 550px, $margin : 0px 4px, $width : 100%);
 }
 

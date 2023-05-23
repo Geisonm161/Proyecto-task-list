@@ -1,30 +1,21 @@
 
+@import '../../SASS/Mixin.module.scss';
+
 .input{
-    width: 100%;
-    padding: 15px;
-    border: 2px solid rgb(0, 0, 0);
-    border-radius: 10px;
-    font-size: 18px;
+    @include inputMain();
+    @include inputMain( min-width,  0px,  max-width,  550px, 7px);
 }
 
 .insideInput{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 5%;
-    border: 2px solid rgb(0, 0, 0);
-    border-radius: 10px;
-    overflow: auto;
+    @include inputInside();
+    @include inputInside( min-width,  0px,  max-width,  550px, 7px);
 }
 
 
 
 .footInput{
-    margin:0px 0px 2px 10px;
-    font-weight: 500;
-    color: rgb(0, 0, 0);
-    font-size: 25px;
+    @include inputFoot();
+    @include inputFoot( min-width,  0px,  max-width,  550px, 15px);
 }
 
 .alertInput{
