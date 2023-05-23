@@ -1,4 +1,5 @@
-import './CreateTaskView.css'
+import styles from './CreateTaskView.module.scss';
+import styleGlobal from '../../SASS/Global.module.scss';
 import Input from '../../Componentes/Input/Input';
 import Imagen from '../../assets/image/Imagenes/Darlin-01.png';
 import Button from '../../Componentes/Button/Button';
@@ -14,7 +15,7 @@ function CreateTaskView({ handleUserSession }) {
   const navigate = useNavigate();
 
   const [group, setGroup] = useState({ title: "", description: "" });
-  const [handleAccessloader, setHandleAccessLoader] = useState(false);
+  const [handleAccessloader, setHandleAccessLoader] = useState();
 
   const onChange = (e) => {
 
@@ -34,10 +35,10 @@ function CreateTaskView({ handleUserSession }) {
 
       const res = await task(group.title, group.description);
 
-        const DatosLocal = getItem(userTokenKey) ?? '[]';
-        setItem(userTokenKey, [...DatosLocal, group])
+      const DatosLocal = getItem(userTokenKey) ?? '[]';
+      setItem(userTokenKey, [...DatosLocal, group])
 
-        navigate('/list');
+      navigate('/list');
 
     }
   }
@@ -55,74 +56,84 @@ function CreateTaskView({ handleUserSession }) {
   }
 
   return (
-    <div className='container-view-task'>
-      <div className='container-top-view-task'>
-        <div className='container-image-view-task' >
-          <img className='image-view-task'
+    <div className={styleGlobal.containerMain}>
+      <div className={styleGlobal.containerTop}>
+        <div className={styleGlobal.containerImageTopLeft} >
+          <img className={styleGlobal.imageTopLeft}
             alt='Logo'
             src={Imagen}
             onClick={handleAccessToMainView}
           />
         </div>
 
-        <div className='container-log-out-view-task'>
-          <button className='button-log-out-view-task'
-            onClick={handleLogOut}>Log Out</button>
+        <div>
+          <button
+            className={styleGlobal.buttonLogOutTopRight}
+            onClick={handleLogOut}>
+            Log Out
+          </button>
         </div>
 
       </div>
 
-      <div className='sub-container-view-task'>
-        <div className='container-title-view-task'>
-          <div className='container-button-view-task'>
-            <h1 className='title-view-task'>Create New Task</h1>
+      <div className={styleGlobal.containerSubContainer}>
+        <div className={styleGlobal.subContainer}>
+          <div className={styles.titleContainer}>
+            <h1 className={styleGlobal.title}>New Task</h1>
+            <div className={styles.containerButton}>
 
-            <button
-              onClick={Back}
-              className='button-back-view-task'
-            >Back</button>
+              <button
+                onClick={Back}
+                className={styles.buttonBack}
+              >Back</button>
+
+            </div>
 
           </div>
 
+          <form onSubmit={handleSendFormulary}>
+            <div className={styleGlobal.containerInput}>
+              <Input
+                type='text'
+                aboveInput='Title'
+                onChange={onChange}
+                className='true'
+                name='title'
+                placeholder='Title here'
+                value={group.title}
+                required
+              />
+              <Input
+                type='text'
+                aboveInput='Description'
+                onChange={onChange}
+                className='true'
+                name='description'
+                placeholder='Description here'
+                value={group.description}
+                required
+              />
+            </div>
+
+            <div className={styleGlobal.containerButtonLower}>
+
+              {
+                handleAccessloader
+                  ?
+                  <AlertAndLogin
+                    handleAccessLoader={handleAccessloader}
+                  />
+                  :
+                  <Button
+                    type='submit'
+                    className='true'
+                    Text='Create Task'
+                  />
+              }
+
+            </div>
+          </form>
         </div>
-        
-        <form onSubmit={handleSendFormulary}>
-          <div className='container-input-view-task'>
-            <Input
-              type='text'
-              aboveInput='Title'
-              onChange={onChange}
-              className={true}
-              name='title'
-              placeholder='Title here'
-              value={group.title}
-              required
-            />
-            <Input
-              type='text'
-              aboveInput='Description'
-              onChange={onChange}
-              className={true}
-              name='description'
-              placeholder='Description here'
-              value={group.description}
-              required
-            />
-          </div>
-
-          <AlertAndLogin
-            handleAccessLoader={handleAccessloader}
-          />
-
-          <div className='container-button-create-view-task'>
-            <Button
-              type='submit'
-              className={true}
-              Text='Create Task'
-            />
-          
-          </div>
-        </form>
       </div>
     </div>
   )

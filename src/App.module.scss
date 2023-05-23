@@ -1,0 +1,27 @@
+
+@import './SASS/Mixin.module.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    font-size: 16px;
+
+
+    @include mv(max-width, 1469px, 100%, url(./assets/image/Imagenes/potw1610a-01-01.jpg));
+
+    @include mv(min-width, 1470px, 100%, url(./assets/image/Imagenes/yeison-01.jpg)) {
+        @include mv(max-width, 1500px, 100%, url(./assets/image/Imagenes/yeison-01.jpg));
+
+    }
+
+    ;
+
+    @include mv();
+}

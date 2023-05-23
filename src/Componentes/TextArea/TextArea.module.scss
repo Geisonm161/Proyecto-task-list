@@ -1,0 +1,26 @@
+.footTextArea{
+    margin:0px 0px 2px 10px;
+    font-weight: 500;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+}
+
+.insideInputTextArea{
+    width: 100%;
+    min-height: 90px;
+    max-height: 150px;
+    resize: vertical;
+    padding: 10px;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    overflow: auto;
+    margin-bottom: 20px;
+    font-size: 18px;
+
+    &.insideInputTextArea::-webkit-scrollbar{
+        width: 15px;
+        height: 0px;
+        background: #efefef00;
+      }
+      
+}

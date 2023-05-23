@@ -1,5 +1,5 @@
 import React from 'react'
-import './Task.css';
+import styles from './Task.module.scss';
 
 function Task({
   title,
@@ -11,54 +11,45 @@ function Task({
 }) {
 
   return (
-    <div className={'container-main-task'}>
 
-      <div className={
-        accessClass
-          ? 'task-create-task'
-          : 'container-task'
-      } onClick={onClick}>
+    <div className={styles.widthMedia}>
 
-        <div className='information-task'>
+      <div className={styles.widthMedia}>
 
-          <div className='title-task'>
-            {
-              access
-              && <h4 style={{
-                display: 'inline-block',
-                color: 'black'
-              }}>Title:</h4>
-            }
-            {title}
-          </div>
+        <div className={
+          accessClass
+            ? styles.taskCreate
+            : styles.containerTask
+        } onClick={onClick}>
 
-          <div className='description-task'>
-            {
-              access
-              && <h4 style={{
-                display: 'inline-block',
-                color: 'black'
-              }}>Description:</h4>
-            }
-            {desc}
-          </div>
+          <div className={styles.informationTask}>
 
-          <div className='description-task'>
-            {
-              access
-              && <h4 style={{
-                display: 'inline-block',
-                color: 'black'
-              }}>Id:</h4>
-            }
-            {id}
+            {access && <h4 className={styles.datos}>
+              <li>Title:</li>
+            </h4>}
+            <p>{title}</p>
+
+            <hr className={styles.hr} />
+
+            {access && <h4 className={styles.datos}>
+              <li>Description:</li>
+            </h4>}
+            <p>{desc}</p>
+
+            {access && <hr className={styles.hr} />}
+
+            {access && <h4 className={styles.datos}>
+              <li>Id:</li>
+            </h4>}
+            <p>{id}</p>
+
           </div>
 
         </div>
 
       </div>
 
-      <hr />
+      <hr className={styles.hrhr} />
 
     </div>
 

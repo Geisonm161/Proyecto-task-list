@@ -1,5 +1,6 @@
 import React from 'react'
-import './InformationIDView.css'
+import styles from './InformationIDView.module.scss';
+import styleGlobal from '../../SASS/Global.module.scss';
 import Image from '../../assets/image/Imagenes/Darlin-01.png';
 import Task from '../../Componentes/Task/Task';
 import ButtonIcons from '../../Componentes/IconsButton/ButtonIcons';
@@ -61,52 +62,56 @@ function InformationID({ handleTaskViewAction, handleUserSession }) {
   }, [])
 
   return (
-    <div className='container-id-view'>
-      <div className='container-top-id-view'>
-        <div className='container-image-id-view' >
-          <img className='image-id-view'
+    <div className={styleGlobal.containerMain}>
+      <div className={styleGlobal.containerTop}>
+        <div className={styleGlobal.containerImageTopLeft} >
+          <img className={styleGlobal.imageTopLeft}
             alt='Logo'
             src={Image}
             onClick={handleAccessToMainView}
           />
         </div>
-        <div className='container-log-out-id-view'>
-          <button className='button-log-out-id-view'
-            onClick={handleLogOut}>Log Out</button>
+
+        <div>
+          <button
+            className={styleGlobal.buttonLogOutTopRight}
+            onClick={handleLogOut}>
+            Log Out
+          </button>
         </div>
 
       </div>
-      <div className='sub-container-id-view'>
 
-        <div className='container-title-create-id'>
+      <div className={styleGlobal.containerSubContainer}>
+        <div className={styleGlobal.subContainer}>
+          <div className={styles.containerTitle}>
+            <h1 className={styleGlobal.title}>Information ID</h1>
+          </div>
 
-          <h1 className='title-id-view'>Information ID</h1>
+          <div className={styles.containerTask}>
 
-        </div>
-
-        <div className='container-task-id-view'>
-
-          {results.map((gro, index) =>
-            <Task
-              key={index}
-              title={` ${gro.title ? gro.title : 'Not exist'}`}
-              desc={` ${gro.desc ? gro.desc : 'Not exist'}`}
-              id={` ${gro._id ? gro._id : 'Not exist'}`}
-              accessClass={false}
-              access={true}
-            />)}
+            {results.map((gro, index) =>
+              <Task
+                key={index}
+                title={` ${gro.title ? gro.title : 'Not exist'}`}
+                desc={` ${gro.desc ? gro.desc : 'Not exist'}`}
+                id={` ${gro._id ? gro._id : 'Not exist'}`}
+                access
+                accessClass
+              />)}
 
             <ButtonIcons
               removeTask={removeTask}
               cancel={handleAccessToMainView}
               rewriteHomework={rewriteHomework}
             />
-        </div>
+          </div>
 
-        <AlertsAndLogin 
-        handleAccessLoader={handleLoadView}
-        />
-  
+          <AlertsAndLogin
+            handleAccessLoader={handleLoadView}
+          />
+
+        </div>
       </div>
     </div>
   )

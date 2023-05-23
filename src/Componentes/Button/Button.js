@@ -1,18 +1,18 @@
 import React from 'react'
-import './Button.css'
+import styles from './Button.module.scss';
 function Button({ Text, onClick, className, type = 'button', alertGuide }) {
   return (
     <div className={
-      className ? 'container-main-button' : ''
+      className ?? styles.containerButton 
     }>
 
       <button type={type}
         className={
           className
-            ? 'button-task-create'
+            ? styles.buttonGlobal
             : alertGuide
-              ? 'button-guide blinks'
-              : 'button-create'
+              ? `${styles.buttonGuide} ${styles.blinks}`
+              : styles.buttonCreate
         }
         onClick={onClick} >{Text}
       </button>

@@ -1,4 +1,6 @@
-import './RewriteTaskView.css';
+
+import styleGlobal from '../../SASS/Global.module.scss';
+import styles from './RewriteTaskView.module.scss';
 import Input from '../../Componentes/Input/Input';
 import Imagen from '../../assets/image/Imagenes/Darlin-01.png';
 import Button from '../../Componentes/Button/Button';
@@ -18,7 +20,7 @@ function RewriteTaskView({ handleTaskViewAction, handleUserSession }) {
 
 
   const [group, setGroup] = useState({ title: "", description: "" });
-  const [handleAccessLoader, setHandleAccessLoader] = useState(false);
+  const [handleAccessLoader, setHandleAccessLoader] = useState();
 
   const idInUse = () => {
 
@@ -63,67 +65,90 @@ function RewriteTaskView({ handleTaskViewAction, handleUserSession }) {
 
   useEffect(() => {
     idInUse();
+
+    window.addEventListener('popstate', Back);
+
+    return () => {
+      window.removeEventListener('popstate', Back);
+    }
   }, []);
 
+
+
   return (
-    <div className='container-rewrite'>
-      <div className='container-top-rewrite'>
-        <div className='container-image-rewrite' >
-          <img className='image-rewrite'
+    <div className={styleGlobal.containerMain}>
+      <div className={styleGlobal.containerTop}>
+        <div className={styleGlobal.containerImageTopLeft} >
+          <img className={styleGlobal.imageTopLeft}
             alt='Logo'
             src={Imagen}
             onClick={handleAccessViewMain}
           />
         </div>
-        <div className='container-log-out-rewrite'>
-          <button className='button-log-out-rewrite' onClick={close}>Log Out</button>
-        </div>
 
-      </div>
-      <div className='sub-container-rewrite'>
-
-        <div className='container-button-back-rewrite'>
+        <div>
           <button
-            onClick={Back}
-            className='button-back-rewrite'>
-            Back
+            className={styleGlobal.buttonLogOutTopRight}
+            onClick={close}>
+            Log Out
           </button>
         </div>
 
-        <form onSubmit={handleSendFormulary}>
-          <div className='container-input-rewrite'>
-            <Input
-              required
-              aboveInput='Title'
-              onChange={onChange}
-              className={true}
-              name='title'
-              placeholder='Title here'
-              value={group.title} />
+      </div>
 
-            <TextArea
-              required
-              classNameTextarea={true}
-              abovetext='Description'
-              onChange={onChange}
-              name='description'
-              placeholder='Description here'
-              value={group.description}
-            />
+      <div className={styleGlobal.containerSubContainer}>
+        <div className={styleGlobal.subContainer}>
+          <div className={styles.containerTitle}>
+            <h1 className={styleGlobal.title}>Rewrite Task</h1>
+            <div className={styles.containerButtonBack}>
+              <button
+                onClick={Back}
+                className={styles.buttonBack}>
+                Back
+              </button>
+            </div>
           </div>
 
-          <AlertsAndLogin
-            handleAccessLoader={handleAccessLoader}
-          />
 
-          <div className='container-button-rewrite'>
-            <Button
-              type='submit'
-              className={true}
-              Text='Actualizar'
-            />
-          </div>
-        </form>
+          <form onSubmit={handleSendFormulary}>
+            <div className={styleGlobal.containerInput}>
+              <Input
+                required
+                aboveInput='Title'
+                onChange={onChange}
+                className='true'
+                name='title'
+                placeholder='Title here'
+                value={group.title} />
+
+              <TextArea
+                required
+                classNameTextarea='true'
+                abovetext='Description'
+                onChange={onChange}
+                name='description'
+                placeholder='Description here'
+                value={group.description}
+              />
+            </div>
+
+            <div className={styleGlobal.containerButtonLower}>
+              {
+                handleAccessLoader
+                  ?
+                  <AlertsAndLogin
+                    handleAccessLoader={handleAccessLoader}
+                  />
+                  :
+                  <Button
+                    type='submit'
+                    className='true'
+                    Text='Update'
+                  />
+              }
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   )

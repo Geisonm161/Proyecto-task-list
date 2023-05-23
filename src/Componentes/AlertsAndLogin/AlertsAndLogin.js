@@ -1,29 +1,24 @@
 import React from 'react'
+import styles from './AlertsAndLogin.module.scss';
 
-function AlertsAndLogin({ showError, userExist, handleAccessLoader, userInvalid }) {
+function AlertsAndLogin({ userExist, handleAccessLoader, userInvalid }) {
 
     return (
 
-        <div>
-            {
-                showError
-                && <p className='error-register'>
-                    all capos are required</p>
-            }
-
+        <div className={styles.containerAlert}>
             {
                 userExist
-                && <p className='error-user-register'>
+                && <p className={styles.error}>
                     This user already exists</p>
             }
 
-            <div className='container-loader-register'>
-                {handleAccessLoader && <p className='loader'></p>}
+            <div className={styles.containerLoader}>
+                {handleAccessLoader && <p className={styles.loader}></p>}
             </div>
 
             {
             userInvalid 
-            && <p className='error-user-login'>
+            && <p className={styles.error}>
               User and/or Password Incorrect</p>
               }
 

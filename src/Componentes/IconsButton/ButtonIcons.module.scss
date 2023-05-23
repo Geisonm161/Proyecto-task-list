@@ -1,0 +1,75 @@
+
+@import '../../SASS/Mixin.module.scss';
+
+.containerIcons{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 10px 10px;
+}
+
+.iconoRemove{
+    display: flex;
+    font-size: 30PX;
+    align-items: center;
+    justify-content: center;
+    width: 80px ;
+    color: rgba(0, 0, 0, 0.832);
+    background-color: rgb(255, 0, 0);
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 5px;
+    border: solid rgb(0, 0, 0) 1px;
+    cursor: pointer;
+
+    &.iconoRemove:hover{
+        color: rgb(0, 0, 0);
+        border: solid 1px rgb(255, 184, 184);
+    }
+}
+
+
+.iconoTask{
+    display: flex;
+    font-size: 30px;
+    align-items: center;
+    justify-content: center;
+    width: 80px ;
+    color: rgb(255, 255, 255);
+    background-color: rgb(3, 21, 174);
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-left: 10px;
+    border: solid rgb(0, 0, 0) 1px;
+    cursor: pointer;
+
+    &.iconoTask:hover{
+        color: rgb(0, 255, 4);
+        border: solid 1px rgb(0, 255, 4) ;
+    }
+}
+
+
+.cancel{
+    margin-left: 460px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px ;
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.64);
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 7px;
+    font-family: sans-serif;
+    pointer-events: auto;
+    border: solid rgb(0, 0, 0) 1px;
+    cursor: pointer;
+    
+@include marginButtonCancel();
+
+    &.cancel:hover{
+        border: solid rgb(255, 255, 255) 1px;
+    }
+}

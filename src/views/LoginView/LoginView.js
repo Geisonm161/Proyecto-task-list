@@ -1,4 +1,6 @@
-import './LoginView.css'
+
+import styles from './LoginView.module.scss';
+import styleGlobal from '../../SASS/Global.module.scss';
 import Input from '../../Componentes/Input/Input';
 import Imagen from '../../assets/image/Imagenes/Darlin-01.png';
 import Button from '../../Componentes/Button/Button';
@@ -12,8 +14,8 @@ function LoginView({ handleUserSession }) {
   const navigate = useNavigate();
 
   const [users, setUsers] = useState({ userName: '', password: '' });
-  const [HandleLoader, setHandleLoader] = useState(false);
-  const [userInvalid, setUserInvalid] = useState(null);
+  const [handleLoader, setHandleLoader] = useState();
+  const [userInvalid, setUserInvalid] = useState();
 
   const onChange = (e) => {
 
@@ -56,73 +58,81 @@ function LoginView({ handleUserSession }) {
   }
 
   return (
-    <div className='container-login'>
-      <div className='container-top-login'>
-        <div className='container-image-login' >
-          <img className='image-login'
+    <div className={styleGlobal.containerMain}>
+      <div className={styleGlobal.containerTop}>
+        <div className={styleGlobal.containerImageTopLeft} >
+          <img className={styleGlobal.imageTopLeft}
             alt='Logo'
             src={Imagen}
           />
         </div>
-        <div className='container-log-out-login'>
-          <button className='button-log-out-login' onClick={register}>Register</button>
+
+        <div>
+          <button
+            className={styleGlobal.buttonLogOutTopRight}
+            onClick={register}>
+            Register
+          </button>
         </div>
 
       </div>
-      <div className='sub-container-login'>
 
-        <div className='container-title-login'>
+      <div className={styleGlobal.containerSubContainer}>
+        <div className={styleGlobal.subContainer}>
+          <div className={styles.containerTitle}>
+            <h1 className={styleGlobal.title}>Login</h1>
 
-          <h1 className='title-login'>Login</h1>
+          </div>
 
-        </div>
+          <div className={styleGlobal.containerInput}>
 
-        <div className='container-input-login'>
+            <form onSubmit={handleSendFormulary}>
 
-          <form onSubmit={handleSendFormulary}>
-
-            <Input
-              aboveInput='UserName'
-              onChange={onChange}
-              className={true}
-              name='userName'
-              placeholder='UserName here'
-              value={users.userName}
-              type='text'
-              required
-            />
-
-            <Input
-              aboveInput='Pasword'
-              onChange={onChange}
-              className={true}
-              name='password'
-              placeholder='Pasword here'
-              value={users.password}
-              type='password'
-              required
-            />
-
-            <AlertsAndLogin
-              handleAccessLoader={HandleLoader}
-              userInvalid={userInvalid}
-            />
-
-            <div className='container-button-login'>
-              <Button
-                type='submit'
-                className={true}
-                Text='Login'
+              <Input
+                aboveInput='UserName'
+                onChange={onChange}
+                className='true'
+                name='userName'
+                placeholder='UserName here'
+                value={users.userName}
+                type='text'
+                required
               />
 
-            </div>
-          </form>
-        </div>
+              <Input
+                aboveInput='Pasword'
+                onChange={onChange}
+                className='true'
+                name='password'
+                placeholder='Pasword here'
+                value={users.password}
+                type='password'
+                required
+              />
 
+              <div className={styleGlobal.containerButtonLower}>
+              {
+                handleLoader
+                  ?
+                  <AlertsAndLogin
+                    handleAccessLoader={handleLoader}
+                    userInvalid={userInvalid}
+                  />
+                  :
+                  <Button
+                    type='submit'
+                    className='true'
+                    Text='login'
+                  />
+              }
+
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   )
 }
-
 
 export default LoginView;

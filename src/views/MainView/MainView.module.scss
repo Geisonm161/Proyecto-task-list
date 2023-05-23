@@ -1,0 +1,48 @@
+
+@import '../../SASS/Mixin.module.scss';
+
+.containerSub{
+    @include subContainer(min-width, 200px, max-width, 899px, 90vw );
+    @include subContainer(min-width, 900px, max-width, 15000px, 750px, 2%);
+    min-height: 40vh;    
+    max-height: 70vh;
+    padding: 2% 2%;
+
+    &.containerSub::-webkit-scrollbar{
+        width: 0px;
+        height: 0px;
+        background: #efefef;
+      }
+      
+    &.containerSub::-webkit-scrollbar-thumb{
+        background:#00000040;
+      }
+}
+
+.containerButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerTask{
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+   width: 100%;
+}
+
+.containerEmpty{
+    display: flex;
+    justify-content: center;
+    margin-top: 20vh;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
+    color: rgba(0, 0, 0, 0.626);
+}
+
+.titleContainer{
+    @include containerTitle( min-width, 551px, max-width, 15000px, 0 0 30px 35%, 65%);
+    @include containerTitle($minMedia : min-width, $minExtent : 200px, $maxMedia : max-width, $maxExtent : 550px, $margin : 0px 4px, $width : 100%);
+}
+

@@ -1,4 +1,4 @@
-import './App.css';
+import './App.module.scss';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainView from './views/MainView/MainView';
 import CreateTaskView from './views/CreateTaskView/CreateTaskView';
@@ -9,6 +9,7 @@ import { useCallback, useState } from 'react';
 import InformationIDView from './views/InformationIDView/InformationIDView';
 import RewriteTaskView from './views/RewriteTaskView/RewriteTaskView';
 import { getItem, setItem } from "./services/localStorage";
+import Image from './assets/image/Imagenes/yeison-01.jpg';
 
 const userTokenKey = process.env.REACT_APP_USER_TOKEN
 
@@ -29,6 +30,7 @@ function App() {
   }
 
   return (
+
     <div className="App">
       <BrowserRouter>
         <Routes>

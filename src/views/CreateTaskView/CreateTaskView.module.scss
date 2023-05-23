@@ -1,0 +1,42 @@
+
+@import '../../SASS/Mixin.module.scss';
+
+.containerButton{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin: 20px 10px 30px 0;
+}
+
+.buttonBack{
+  height: 45px;
+  width: 80px;
+  font-size: 20px;
+  background-color: rgb(0, 0, 0);
+  border: none;
+  color: rgb(255, 255, 255);
+  font-family: sans-serif;
+  border-radius: 5px;
+  margin-top: 2px;
+  cursor: pointer;
+
+  &.buttonBack:hover{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: solid rgb(255, 255, 255) 1px;
+  }
+}
+
+
+.title{
+    color: rgb(0, 0, 0);
+    font-size: 35px;
+}
+
+
+.titleContainer{
+  @include containerTitle();
+  @include containerTitle($minMedia : min-width, $minExtent : 200px, $maxMedia : max-width, $maxExtent : 550px, $margin : 0px 4px, $width : 100%);
+
+}
+

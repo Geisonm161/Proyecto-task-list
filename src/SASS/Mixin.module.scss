@@ -1,0 +1,70 @@
+// Mixin
+
+@mixin mv($media : max-width, $medida : 500px, $largo : 100%, $imageUrl: url(./assets/image/Imagenes/mv-01.jpg)) {
+
+    @media screen and ($media : $medida) {
+
+        background-image: $imageUrl;
+        height: $largo;
+        background-repeat: no-repeat;
+        background-size: cover;
+        overflow: hidden;
+        @content;
+
+    }
+}
+
+@mixin containerMain($height: 91vh, $media : max-width, $extent : 15000px) {
+
+    @media screen and ($media : $extent) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: $height;
+        justify-content: space-between;
+    }
+}
+
+
+@mixin subContainer($minMedia, $minExtent, $maxMedia, $maxExtent, $width, $padding : 0 2%) {
+
+    @media only screen and ($minMedia : $minExtent) and ($maxMedia : $maxExtent) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: $width;
+        padding: $padding;
+        background-color: rgba(255, 255, 255, 0.288);
+        border-radius: 20px;
+        border: solid 2px rgba(255, 255, 255, 0.843);
+        overflow: auto;
+    }
+}
+
+
+@mixin containerTitle($minMedia : min-width, $minExtent : 551px, $maxMedia : max-width, $maxExtent : 15000px, $margin : 0 0 0 35%, $width : 65% ) {
+    @media only screen and ($minMedia : $minExtent) and ($maxMedia : $maxExtent) {
+        margin: $margin;
+        width: $width;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @content;
+    }
+}
+
+
+
+@mixin title($minMedia : min-width, $minExtent : 0px, $maxMedia : max-width, $maxExtent : 550px, $mediaText : 25px){
+    @media only screen and ($minMedia : $minExtent) and ($maxMedia : $maxExtent) {
+        font-size: $mediaText;
+        color: rgb(0, 0, 0);
+    }
+
+}
+
+@mixin marginButtonCancel($minMedia : min-width, $minExtent : 0px, $maxMedia : max-width, $maxExtent : 550px, $marginLeft : 40%){
+    @media only screen and ($minMedia : $minExtent) and ($maxMedia : $maxExtent) {
+margin-left: $marginLeft;
+    }
+}

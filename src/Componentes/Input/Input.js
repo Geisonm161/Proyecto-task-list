@@ -1,5 +1,5 @@
 import React from 'react'
-import './Input.css'
+import styles from './Input.module.scss'
 
 function Input({ name,
   placeholder,
@@ -10,25 +10,21 @@ function Input({ name,
   type,
   required,
   handleAlertCreateTask,
-  style }) {
+  alertguide }) {
   return (
     <div >
-      <div className={className && 'foot-input'}>{aboveInput}</div>
+      <div className={className && styles.footInput}>{aboveInput}</div>
       <div>
         <input
-          className={className ? 'inside-input' : 'input-create'}
+          className={`${className ? styles.insideInput : styles.input} ${alertguide ? styles.alertInput : styles.alertInputNone}`}
           type={type}
           name={name}
           required={required}
           placeholder={placeholder}
-          value={!style ? value : 'Press button create'}
+          value={value}
           onChange={onChange}
           onClick={handleAlertCreateTask}
-          style={
-            style
-              ? { background: 'rgb(255 0 15 / 45%)', color: 'white' }
-              : { background: 'white' }
-          }
+          alertguide={alertguide}
         />
       </div>
     </div>

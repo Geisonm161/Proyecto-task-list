@@ -1,24 +1,27 @@
 import React from 'react'
-import './ButtonIcons.css'
+import styles from './ButtonIcons.module.scss';
 import { AiFillDelete } from "react-icons/ai";
 import { BsPencilSquare } from "react-icons/bs";
 
-function ButtonIcons({removeTask, rewriteHomework, cancel}) {
+function ButtonIcons({ removeTask, rewriteHomework, cancel }) {
     return (
 
-        <div className='container-icons'>
+        <div className={styles.containerIcons}>
 
-            <div className='icono-remove'
+            <div
+                className={styles.iconoRemove}
                 onClick={removeTask}>
                 <AiFillDelete />
             </div>
 
-            <div className='icono-task'
+            <div
+                className={styles.iconoTask}
                 onClick={rewriteHomework}>
                 <BsPencilSquare />
             </div>
 
-            <div className='cancel'
+            <div
+                className={styles.cancel}
                 onClick={cancel}>
                 Cancel
             </div>
@@ -28,4 +31,4 @@ function ButtonIcons({removeTask, rewriteHomework, cancel}) {
     )
 }
 
-export default ButtonIcons
+export default ButtonIcons;

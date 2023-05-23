@@ -1,4 +1,5 @@
-import './MainView.css'
+import styles from './MainView.module.scss'
+import styleGlobal from '../../SASS/Global.module.scss';
 import Input from '../../Componentes/Input/Input';
 import Imagen from '../../assets/image/Imagenes/Darlin-01.png';
 import Task from '../../Componentes/Task/Task';
@@ -15,8 +16,8 @@ function MainView({ handleUserSession }) {
   const [results, setResults] = useState([]);
   const [group, setGroup] = useState([]);
   const [values, setValues] = useState('');
-  const [handleLoader, setHandleLoader] = useState(false);
-  const [alertGuide, setAlertGuide] = useState(false);
+  const [handleLoader, setHandleLoader] = useState();
+  const [alertguide, setAlertguide] = useState();
 
   const handleChange = async (e) => {
     const { value } = e.target;
@@ -30,13 +31,11 @@ function MainView({ handleUserSession }) {
     setValues(value);
   }
 
-  const ere = useCallback(console.log('nada'), []) ;
-
   const datos = getItem(process.env.REACT_APP_TASK_YEY);
 
   const handleSendFormulary = useCallback(async () => {
     setHandleLoader(true);
-    
+
     const { data } = await getList();
 
     setGroup(data)
@@ -70,72 +69,72 @@ function MainView({ handleUserSession }) {
 
   const handleAlertCreateTask = () => {
     if (results.length === 0) {
-      setAlertGuide(true);
+      setAlertguide("true");
     }
   }
 
   return (
-    <div className='container-view-main'>
-      <div className='container-top-view-main'>
-        <div className='container-image-view-main' >
-          <img className='image-view-main'
+    <div className={styleGlobal.containerMain}>
+      <div className={styleGlobal.containerTop}>
+        <div className={styleGlobal.containerImageTopLeft} >
+          <img className={styleGlobal.imageTopLeft}
             alt='Logo'
             src={Imagen}
             onClick={handleReturnMainView}
           />
         </div>
 
-        <div className='container-log-out-view-main'>
+        <div>
           <button
-            className='button-log-out-view-main'
-            onClick={handleLogOut}>Log Out
+            className={styleGlobal.buttonLogOutTopRight}
+            onClick={handleLogOut}>
+            Log Out
           </button>
         </div>
 
       </div>
 
-      <div className='sub-container-view-main'>
-        <div className='container-title-view-main'>
-          <h1 className='title-view-main'>My Task List</h1>
-          <div className='container-button-view-main'>
-            <Button
-              className={false}
-              Text='Create'
-              onClick={() => navigate('/create')}
-              alertGuide={alertGuide}
+      <div className={styleGlobal.containerSubContainer}>
+        <div className={styles.containerSub}>
+          <div className={styles.titleContainer}>
+            <h1 className={styleGlobal.title}>My Task List</h1>
+            <div className={styles.containerButton}>
+              <Button
+                Text='Create'
+                onClick={() => navigate('/create')}
+                alertGuide={alertguide}
+              />
+            </div>
+          </div>
+
+          <div className={styleGlobal.containerInput}>
+            <Input
+              onChange={handleChange}
+              name='name'
+              placeholder='Search'
+              value={`${alertguide ? 'press create button' : values}`}
+              handleAlertCreateTask={handleAlertCreateTask}
+              alertguide={alertguide}
             />
           </div>
-        </div>
 
-        <div className='container-input-view-main'>
-          <Input
-            onChange={handleChange}
-            name='name'
-            placeholder='Search'
-            value={values}
-            handleAlertCreateTask={handleAlertCreateTask}
-            style={alertGuide}
+          <div className={styles.containerTask}>
+            {results.length !== 0 ? results.map((gro, index) =>
+              <Task
+                key={index}
+                title={gro.title}
+                desc={gro.desc}
+                onClick={() => navigate(`/list/${gro._id}`)}
+                removeTask={handleRemoveTask(index)}
+              />
+            ) : <p className={styles.containerEmpty}>Empty task list</p>}
+          </div>
+
+          <AlertsAndLogin
+            handleAccessLoader={handleLoader}
           />
+
         </div>
-
-        <div className='container-task-view-main'>
-          {results.length !== 0 ? results.map((gro, index) =>
-            <Task
-              key={index}
-              title={<h3 style={{ fontWeight: 700 }}>{gro.title}</h3>}
-              desc={gro.desc}
-              onClick={() => navigate(`/list/${gro._id}`)}
-              removeTask={handleRemoveTask(index)}
-              accessClass={true}
-              handleColorTitle={true}
-            />
-          ) : <p className='container-empty-task-list-view-main'>Empty task list</p>}
-        </div>
-
-        <AlertsAndLogin
-          handleAccessLoader={handleLoader}
-        />
-
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import React from 'react'
-import './TextArea.css';
+import styles from './TextArea.module.scss';
 
 function TextArea({ name,
   required,
@@ -10,7 +10,7 @@ function TextArea({ name,
 }) {
   return (
     <div>
-      <div className='foot-text-area'>
+      <div className={styles.footTextArea}>
         {abovetext}
       </div>
 
@@ -20,7 +20,7 @@ function TextArea({ name,
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className='inside-input-textarea' /> </div>
+        className={styles.insideInputTextArea} /> </div>
   )
 }
 

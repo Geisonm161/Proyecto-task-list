@@ -1,4 +1,6 @@
-import './RegisterView.css'
+
+import styles from './RegisterView.module.scss'
+import styleGlobal from '../../SASS/Global.module.scss';
 import Input from '../../Componentes/Input/Input';
 import Imagen from '../../assets/image/Imagenes/Darlin-01.png';
 import Button from '../../Componentes/Button/Button';
@@ -12,8 +14,8 @@ function RegisterView() {
   const navigate = useNavigate();
 
   const [users, setUsers] = useState({ userName: '', password: '' });
-  const [handleAccessLoader, setHandleAccessLoader] = useState(false);
-  const [userExist, setUserExist] = useState(null);
+  const [handleAccessLoader, setHandleAccessLoader] = useState();
+  const [userExist, setUserExist] = useState();
 
   const onChange = (e) => {
 
@@ -55,71 +57,83 @@ function RegisterView() {
   }
 
   return (
-    <div className='container-register'>
-      <div className='container-top-register'>
-        <div className='container-image-register' >
-          <img className='image-register'
+    <div className={styleGlobal.containerMain}>
+      <div className={styleGlobal.containerTop}>
+        <div className={styleGlobal.containerImageTopLeft} >
+          <img className={styleGlobal.imageTopLeft}
             alt='Logo'
             src={Imagen}
           />
         </div>
 
-        <div className='container-log-out-register'>
-          <button className='button-log-out-register'
-            onClick={handleAccessLogin}>Login</button>
+        <div>
+          <button
+            className={styleGlobal.buttonLogOutTopRight}
+            onClick={handleAccessLogin}>
+            Login
+          </button>
         </div>
 
       </div>
 
-      <div className='sub-container-register'>
+      <div className={styleGlobal.containerSubContainer}>
+        <div className={styleGlobal.subContainer}>
+          <div className={styles.containerTitle}>
+            <h1 className={styleGlobal.title}>Register Screen</h1>
 
-        <div className='container-title-register'>
-          <h1 className='title-register'>Register Screen</h1>
-        </div>
+          </div>
 
-        <div className='container-input-register'>
-          <form onSubmit={handleSendFormulary}>
-            <Input
-              aboveInput='UserName'
-              onChange={onChange}
-              className
-              name='userName'
-              placeholder='UserName here'
-              value={users.userName}
-              type='email'
-              required
-            />
+          <div className={styleGlobal.containerInput}>
 
-            <Input
-              aboveInput='Pasword'
-              onChange={onChange}
-              className
-              name='password'
-              placeholder='Pasword here'
-              value={users.password}
-              type='password'
-              required
-            />
+            <form onSubmit={handleSendFormulary}>
 
-            <AlertsAndLogin
-              userExist={userExist}
-              handleAccessLoader={handleAccessLoader}
-            />
-
-            <div className='container-button-register'>
-              <Button
-                type='submit'
-                className={true}
-                Text='Register'
+              <Input
+                aboveInput='UserName'
+                onChange={onChange}
+                className="true"
+                name='userName'
+                placeholder='UserName here'
+                value={users.userName}
+                type='email'
+                required
               />
 
-            </div>
-          </form>
+              <Input
+                aboveInput='Pasword'
+                onChange={onChange}
+                className="true"
+                name='password'
+                placeholder='Pasword here'
+                value={users.password}
+                type='password'
+                required
+              />
+
+              <div className={styleGlobal.containerButtonLower}>
+
+              {
+                handleAccessLoader || userExist
+                  ?
+                  <AlertsAndLogin
+                  userExist={userExist}
+                  handleAccessLoader={handleAccessLoader}
+                  />
+                  :
+                  <Button
+                    type='submit'
+                    className='true'
+                    Text='Register'
+                  />
+                  
+              }
+
+              </div>
+            </form>
+          </div>
         </div>
-
-
       </div>
     </div>
   )
 }
+
 export default RegisterView;
