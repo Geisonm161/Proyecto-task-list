@@ -4,11 +4,13 @@
 .input{
     @include inputMain();
     @include inputMain( min-width,  0px,  max-width,  550px, 7px);
+    font-size: clamp(0.9em, 3vw, 1.2em);
 }
 
 .insideInput{
     @include inputInside();
     @include inputInside( min-width,  0px,  max-width,  550px, 7px);
+    font-size: clamp(0.9em, 3vw, 1.2em);
 }
 
 
@@ -16,6 +18,7 @@
 .footInput{
     @include inputFoot();
     @include inputFoot( min-width,  0px,  max-width,  550px, 15px);
+    font-size: clamp(0.9em, 3vw, 1.2em);
 }
 
 .alertInput{

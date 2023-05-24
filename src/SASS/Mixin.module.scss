@@ -83,7 +83,7 @@
     }
 }
 
-@mixin inputInside($minMedia : min-width, $minExtent : 551px, $maxMedia : max-width, $maxExtent : 15000px, $padding : 15px) {
+@mixin inputInside($minMedia : min-width, $minExtent : 551px, $maxMedia : max-width, $maxExtent : 15000px, $padding : 10px) {
 
     @media only screen and ($minMedia : $minExtent) and ($maxMedia : $maxExtent) {
 
@@ -99,7 +99,7 @@
 
 }
 
-@mixin inputMain($minMedia : min-width, $minExtent : 551px, $maxMedia : max-width, $maxExtent : 15000px, $padding : 15px) {
+@mixin inputMain($minMedia : min-width, $minExtent : 551px, $maxMedia : max-width, $maxExtent : 15000px, $padding : 10px) {
 
     @media only screen and ($minMedia : $minExtent) and ($maxMedia : $maxExtent) {
 

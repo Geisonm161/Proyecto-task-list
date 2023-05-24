@@ -45,7 +45,7 @@ function RewriteTaskView({ handleTaskViewAction, handleUserSession }) {
 
     setHandleAccessLoader(true);
 
-    const { data } = await update(params.id, group.title, group.description);
+   await update(params.id, group.title, group.description);
 
     Back();
 
