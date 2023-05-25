@@ -2,8 +2,8 @@
 @import '../../SASS/Mixin.module.scss';
 
 .containerSub{
-    @include subContainer(min-width, 200px, max-width, 899px, 90vw );
-    @include subContainer(min-width, 900px, max-width, 15000px, 650px, 1%);
+    @include subContainer(min-width, 0px, max-width, 599px, 90vw );
+    @include subContainer(min-width, 600px, max-width, 15000px, 550px, 1%);
     min-height: 40vh;    
     max-height: 70vh;
 
@@ -34,7 +34,7 @@
 .containerEmpty{
     display: flex;
     justify-content: center;
-    margin-top: 20vh;
+    margin-top: 8vh;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 30px;
     color: rgba(0, 0, 0, 0.626);

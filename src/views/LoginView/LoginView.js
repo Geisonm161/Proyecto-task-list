@@ -89,22 +89,22 @@ function LoginView({ handleUserSession }) {
             <form onSubmit={handleSendFormulary}>
 
               <Input
-                aboveInput='UserName'
+                aboveInput='User Name'
                 onChange={onChange}
                 className='true'
                 name='userName'
-                placeholder='UserName here'
+                placeholder='User Name here'
                 value={users.userName}
                 type='text'
                 required
               />
 
               <Input
-                aboveInput='Pasword'
+                aboveInput='Password'
                 onChange={onChange}
                 className='true'
                 name='password'
-                placeholder='Pasword here'
+                placeholder='Password here'
                 value={users.password}
                 type='password'
                 required
