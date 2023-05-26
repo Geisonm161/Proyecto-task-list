@@ -18,6 +18,8 @@ function MainView({ handleUserSession }) {
   const [values, setValues] = useState('');
   const [handleLoader, setHandleLoader] = useState();
   const [alertguide, setAlertguide] = useState();
+  const [handleEmpty, setHandleEmpty] = useState();
+
 
   const handleChange = async (e) => {
     const { value } = e.target;
@@ -31,9 +33,10 @@ function MainView({ handleUserSession }) {
     setValues(value);
   }
 
-  const datos = getItem(process.env.REACT_APP_TASK_YEY);
 
   const handleSendFormulary = useCallback(async () => {
+
+
     setHandleLoader(true);
 
     const { data } = await getList();
@@ -41,6 +44,11 @@ function MainView({ handleUserSession }) {
     setGroup(data)
     setResults(data);
     setHandleLoader(false);
+
+    if (data.length === 0) {
+      setHandleEmpty(true);
+
+    }
 
     setItem(process.env.REACT_APP_TASK_YEY, data);
 
@@ -119,7 +127,7 @@ function MainView({ handleUserSession }) {
           </div>
 
           <div className={styles.containerTask}>
-            {results.length !== 0 ? results.map((gro, index) =>
+            {results.map((gro, index) =>
               <Task
                 key={index}
                 title={gro.title}
@@ -127,12 +135,16 @@ function MainView({ handleUserSession }) {
                 onClick={() => navigate(`/list/${gro._id}`)}
                 removeTask={handleRemoveTask(index)}
               />
-            ) : <p className={styles.containerEmpty}>Empty task list</p>}
+            )}
+
           </div>
 
+          { (handleLoader || handleEmpty)
+          &&
           <AlertsAndLogin
+            handleEmpty={handleEmpty}
             handleAccessLoader={handleLoader}
-          />
+          />}
 
         </div>
       </div>

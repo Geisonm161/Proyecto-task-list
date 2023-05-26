@@ -31,15 +31,6 @@
    width: 100%;
 }
 
-.containerEmpty{
-    display: flex;
-    justify-content: center;
-    margin-top: 8vh;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: clamp(1.5em, 2.5vw, 10em);
-    color: rgba(0, 0, 0, 0.626);
-}
-
 .titleContainer{
     @include containerTitle( min-width, 551px, max-width, 15000px, 0 0 5px 0, 100%);
     @include containerTitle($minMedia : min-width, $minExtent : 200px, $maxMedia : max-width, $maxExtent : 550px, $margin : 0px 4px, $width : 100%);

@@ -100,16 +100,25 @@ function InformationID({ handleTaskViewAction, handleUserSession }) {
                 accessClass
               />)}
 
-            <ButtonIcons
-              removeTask={removeTask}
-              cancel={handleAccessToMainView}
-              rewriteHomework={rewriteHomework}
-            />
+
+            {
+              handleLoadView
+                ?
+                <AlertsAndLogin
+                  handleAccessLoader={handleLoadView}
+                />
+                :
+                <ButtonIcons
+                  removeTask={removeTask}
+                  cancel={handleAccessToMainView}
+                  rewriteHomework={rewriteHomework}
+                />
+            }
+
+
           </div>
 
-          <AlertsAndLogin
-            handleAccessLoader={handleLoadView}
-          />
+
 
         </div>
       </div>

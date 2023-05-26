@@ -1,59 +1,66 @@
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  padding: 2px;
+  border-radius: 5px;
+  font-family: monospace;
+  font-weight: bolder;
+  color: rgb(255, 0, 0);
+  width: 100%;
+  font-size: clamp(0em, 2.5vw, 1em);
+  background: #ffffff91
+}
+
+.containerLoader {
+  margin-top: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
-.error{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    padding: 2px;
-    border-radius: 5px;
-    font-family: monospace;
-    font-weight:bolder;
-    color: rgb(255, 0, 0);
-    width: 100%;
-    font-size: clamp(0em, 2.5vw, 1em);
-    background: #ffffff91
+.loader {
+  width: 80px;
+  /* control the size */
+  aspect-ratio: 1;
+  display: grid;
+  mask: conic-gradient(from 22deg, #0003, #000);
+  animation: load 1s steps(8) infinite;
+}
+
+.loader,
+.loader:before {
+  --_g: linear-gradient(#17177c 0 0) 50%;
+  /* update the color here */
+  background:
+    var(--_g)/34% 8% space no-repeat,
+    var(--_g)/8% 34% no-repeat space;
+}
+
+.loader:before {
+  content: "";
+  transform: rotate(45deg);
+}
+
+@keyframes load {
+  to {
+    transform: rotate(1turn);
   }
-
-  .containerLoader{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5%;
 }
 
-  
-  .loader {
-      width: 80px;
-      /* control the size */
-      aspect-ratio: 1;
-      display: grid;
-      mask: conic-gradient(from 22deg, #0003, #000);
-      animation: load 1s steps(8) infinite;
-    }
-    
-    .loader,
-    .loader:before {
-      --_g: linear-gradient(#17177c 0 0) 50%;
-      /* update the color here */
-      background:
-        var(--_g)/34% 8% space no-repeat,
-        var(--_g)/8% 34% no-repeat space;
-    }
-    
-    .loader:before {
-      content: "";
-      transform: rotate(45deg);
-    }
-    
-    @keyframes load {
-      to {
-        transform: rotate(1turn);
-      }
-    }
-
-    .containerAlert{
-      margin-right: 20px;
+.containerAlert {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
-   
 
+.containerEmpty {
+  display: flex;
+  justify-content: center;
+  margin-top: 8vh;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: clamp(1.5em, 2.5vw, 10em);
+  color: rgba(0, 0, 0, 0.626);
+}
