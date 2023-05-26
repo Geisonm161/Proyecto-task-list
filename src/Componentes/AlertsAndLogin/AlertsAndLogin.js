@@ -11,16 +11,17 @@ function AlertsAndLogin({ userExist, handleAccessLoader, userInvalid }) {
                 && <p className={styles.error}>
                     This user already exists</p>
             }
-
-            <div className={styles.containerLoader}>
-                {handleAccessLoader && <p className={styles.loader}></p>}
-            </div>
-
+            
             {
             userInvalid 
             && <p className={styles.error}>
               User and/or Password Incorrect</p>
               }
+
+            <div className={styles.containerLoader}>
+                {handleAccessLoader && <p className={styles.loader}></p>}
+            </div>
+
 
 
         </div>
