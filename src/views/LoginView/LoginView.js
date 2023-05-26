@@ -34,14 +34,17 @@ function LoginView({ handleUserSession }) {
 
     const res = await login(users.userName, users.password);
 
+    console.log(res)
+
     setHandleLoader(false);
 
     if (res.message === 'User and/or Password Incorrect') {
+
       setUserInvalid(true);
-      setHandleLoader(false);
+      
       setTimeout(() => {
         setUserInvalid(false);
-      }, 5000);
+      }, 3000);
 
       return;
 
@@ -112,7 +115,7 @@ function LoginView({ handleUserSession }) {
 
               <div className={styleGlobal.containerButtonLower}>
               {
-                handleLoader
+                handleLoader || userInvalid
                   ?
                   <AlertsAndLogin
                     handleAccessLoader={handleLoader}

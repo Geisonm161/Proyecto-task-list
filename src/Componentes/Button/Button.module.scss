@@ -10,8 +10,8 @@
   @include globalButton( min-width, 0px, max-width, 550px, 10px, 75px, 27px);
 
   &.buttonGlobal:hover {
-    background-color: rgb(11, 0, 167);
-    border: solid rgb(0, 255, 4) 1px;
+    background-color: rgb(73, 41, 255);
+    border: solid rgb(255, 255, 255) 1px;
   }
 }
 
@@ -93,6 +93,7 @@
   background-color: rgba(17, 0, 255, 0.741);
   border-radius: 5px;
   cursor: pointer;
+  border: none;
 
   &.buttonCreate:hover {
     color: white;

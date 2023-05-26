@@ -35,10 +35,11 @@ function RegisterView() {
 
     const res = await register(users.userName, users.password);
 
+    setHandleAccessLoader(false);
+    
     if (res.message === 'User already exist') {
 
       setUserExist(true);
-      setHandleAccessLoader(false);
 
       setTimeout(() => {
         setUserExist(false);
